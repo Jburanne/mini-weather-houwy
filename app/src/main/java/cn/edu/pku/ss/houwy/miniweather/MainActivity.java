@@ -126,7 +126,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
     }
 
     protected void onActivityResult(int requestCode,int resultCode,Intent data){
-        if(requestCode == 1 && resultCode == RESULT_OK){
+        if(requestCode == 1 && resultCode == 10){
             String newCityCode = data.getStringExtra("cityCode");
             Log.d("myWeather","选择的城市代码为"+newCityCode);
             if(NetUtil.getNetworkState(this) != NetUtil.NETWORK_NONE){
