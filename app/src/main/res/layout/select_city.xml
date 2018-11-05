@@ -36,6 +36,12 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below = "@id/title_top">
+
+        <SearchView
+            android:id="@+id/search_view"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:queryHint="搜索全国城市（中文）"></SearchView>
         
         <ListView
             android:id="@+id/list_city"
@@ -44,7 +50,8 @@
             android:background="#ffffff"
             android:divider="#ffffff"
             android:dividerHeight="2dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_below="@+id/search_view">
         </ListView>
     </RelativeLayout>
 </RelativeLayout>

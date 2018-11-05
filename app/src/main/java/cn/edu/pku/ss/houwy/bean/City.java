@@ -25,4 +25,8 @@ public class City {
     public String getNumber() {
         return number;
     }
+
+    public String getProvince() {
+        return province;
+    }
 }

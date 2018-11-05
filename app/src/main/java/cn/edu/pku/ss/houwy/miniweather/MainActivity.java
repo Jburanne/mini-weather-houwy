@@ -125,10 +125,17 @@ public class MainActivity extends Activity implements View.OnClickListener{
         initView();
     }
 
-    protected void onActivityResult(int requestCode,int resultCode,Intent data){
-        if(requestCode == 1 && resultCode == 10){
-            String newCityCode = data.getStringExtra("cityCode");
+    protected void onActivityResult(int requestCode,int resultCode,Intent data){//获取从selectCity获取的数据，并更新当前页面
+        if(requestCode == 1 && resultCode == 10){//该组合为selectCity的返回值
+            String newCityCode = data.getStringExtra("cityCode");//获取附加消息
             Log.d("myWeather","选择的城市代码为"+newCityCode);
+            //获取sharedPreferences对象
+            SharedPreferences sharedPreferences = getSharedPreferences("config",MODE_PRIVATE);
+            //获取editor对象
+            SharedPreferences.Editor editor = sharedPreferences.edit();//获取编辑器
+            editor.putString("main_city_code",newCityCode);//存储城市代码
+            editor.commit();//提交修改
+
             if(NetUtil.getNetworkState(this) != NetUtil.NETWORK_NONE){
                 Log.d("myWeather","网络Ok");
                 queryWeatherCode(newCityCode);
@@ -155,7 +162,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
                     con.setRequestMethod("GET");
                     con.setConnectTimeout(8000);
                     con.setReadTimeout(8000);
-                    InputStream in = con.getInputStream();
+                    InputStream in = con.getInputStream();//得到数据
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in));
                     StringBuilder response = new StringBuilder();
                     String str;
@@ -166,18 +173,18 @@ public class MainActivity extends Activity implements View.OnClickListener{
                     String responseStr = response.toString();
                     Log.d("myWeather",responseStr);
                     todayWeather = parseXML(responseStr);
-                    if(todayWeather != null){
+                    if(todayWeather != null){//成功解析后
                         Log.d("myWeather",todayWeather.toString());
                         Message msg = new Message();
                         msg.what = UPDATE_TODAY_WEATHER;
                         msg.obj = todayWeather;
-                        mHandler.sendMessage(msg);
+                        mHandler.sendMessage(msg);//成功后数据传给UI线程
                     }
                 }catch (Exception e){
                     e.printStackTrace();
                 }finally {
                     if(con != null){
-                        con.disconnect();
+                        con.disconnect();//关闭连接
                     }
                 }
             }
@@ -355,6 +362,7 @@ void updateTodayWeather(TodayWeather todayWeather){
         setWeatherImg(todayWeather.getType());
         Toast.makeText(MainActivity.this,"更新成功！",Toast.LENGTH_SHORT).show();
 }
+
 
 
 }
