@@ -50,6 +50,13 @@
         android:layout_height="45.0dip"
         android:layout_toLeftOf="@id/title_share"
         android:src="@drawable/base_action_bar_action_city"/>
+    <ProgressBar
+        android:id="@+id/title_progressbar"
+        android:layout_width="45.0dip"
+        android:layout_height="45.0dip"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
 </RelativeLayout>
     <LinearLayout
         android:layout_width="fill_parent"
@@ -228,6 +235,41 @@
             </RelativeLayout>
 
 
+        </RelativeLayout>
+        <!--六日天气信息-->
+
+        <RelativeLayout
+            android:id="@+id/futureweather"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="10.0dip">
+            <!--展示滑动页面-->
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewpager"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+            </android.support.v4.view.ViewPager>
+            <!--两个小点-->
+            <LinearLayout
+                android:id="@+id/indicator"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_alignParentBottom="true">
+                <ImageView
+                    android:id="@+id/img1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:src="@drawable/page_indicator_1"/>
+                <ImageView
+                    android:id="@+id/img2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:src="@drawable/page_indicator_2"/>
+            </LinearLayout>
         </RelativeLayout>
 
 
